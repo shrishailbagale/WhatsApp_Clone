@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item app:showAsAction="always"
+        android:icon="@drawable/ic_menu"
+
+        android:title="">
+
+        <menu>
+            <item
+                android:title="Block"
+                app:showAsAction="never"/>
+            <item
+                android:title="Clear chat"
+                app:showAsAction="never"/>
+            <item
+                android:title="Search"
+                app:showAsAction="never"/>
+            <item
+                android:title="More"
+                app:showAsAction="never"/>
+        </menu>
+
+    </item>
+
+</menu>

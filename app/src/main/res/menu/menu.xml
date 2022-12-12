@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        android:title=""
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/setting"
+        android:title="Setting"/>
+
+    <item
+        android:id="@+id/groupChat"
+        android:checkable="false"
+        android:checked="false"
+        android:title="Group chat" />
+
+    <item
+        android:id="@+id/logout"
+        android:checkable="false"
+        android:checked="false"
+        android:title="Logout" />
+
+</menu>
