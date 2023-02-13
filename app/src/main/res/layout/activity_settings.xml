@@ -1,327 +1,426 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity"
-    android:background="#ebedeb"
-    android:orientation="vertical">
+    tools:context=".SettingsActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SettingsActivity"
-        android:background="#ebedeb"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarSetting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" >
-
-    <ImageView
-        android:id="@+id/backArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/arrow_left"
-        app:tint="@android:color/white" />
-
-        <ImageView
-            android:id="@+id/btnchatmenu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:padding="10dp"
-            android:tint="@color/white"
-            app:srcCompat="@drawable/ic_menu" />
-
-    </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_margin="6dp"
-                android:src="@drawable/profile"
-                app:civ_border_color="#FF000000" />
+            <LinearLayout
+                android:id="@+id/myProfile"
+                style="@style/parent"
+                android:layout_marginBottom="2dp"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <TextView
-                android:id="@+id/change_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Change Profile"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="6dp"
+                        android:src="@drawable/profile"
+                        app:civ_border_color="#FF000000" />
 
-            <EditText
-                android:id="@+id/txtUsername"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical"
+                    android:paddingTop="30dp">
+
+                    <TextView
+                        android:id="@+id/txtUsername"
+                        style="@style/parent"
+                        android:text="Username"
+                        android:textSize="18sp"
+                        android:textStyle="bold|normal" />
+
+                    <TextView
+                        android:id="@+id/about"
+                        style="@style/wrap"
+                        android:text="About" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/account"
+                style="@style/parent"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/match"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_key"
+                        android:tint="@color/logocolor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Account"
+                        android:textSize="16sp"
+                        android:textStyle="bold|normal" />
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Security, Delete, Changes" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/privacy"
+                style="@style/parent"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/match"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_lock"
+                        android:tint="@color/logocolor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Privacy"
+                        android:textSize="16sp"
+                        android:textStyle="bold|normal" />
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Block contacts, privacy" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/contact"
+                style="@style/parent"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/match"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_helpcall"
+                        android:tint="@color/logocolor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Contact us"
+                        android:textSize="16sp"
+                        android:textStyle="bold|normal" />
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Block contacts, privacy" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/feedback"
+                style="@style/parent"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/match"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_feedback"
+                        android:tint="@color/logocolor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Feedback"
+                        android:textSize="16sp"
+                        android:textStyle="bold|normal" />
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Give your feedback" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/help"
+                style="@style/parent"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/match"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_help"
+                        android:tint="@color/logocolor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Help"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Help centre, contact us, privacy policy" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/invite"
+                style="@style/parent"
+                android:layout_below="@id/deleteAccount"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/match"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_share"
+                        android:tint="@color/logocolor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Invite a friend"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Invite your friends or family" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/deleteAccount"
+                style="@style/parent"
+                android:layout_below="@id/invite"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/match"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_delete"
+                        android:tint="@color/logocolor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Delete my account"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="My account delete permanently" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/appInfo"
+                style="@style/parent"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/match"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_baseline_info_24"
+                        android:tint="@color/logocolor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="App info"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/wrap"
+                        android:text="About App" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/logout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:background="#ebedeb"
-                android:drawableLeft="@drawable/ic_baseline_person_outline_24"
-                android:drawablePadding="10dp"
-                android:hint="Your name"
-                android:inputType="textPersonName"
-                android:padding="15dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@android:color/tab_indicator_text"
-                android:textColorHint="@android:color/secondary_text_dark"
-                android:textSize="20sp"
-                app:drawableTint="@color/colorPrimary" />
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:layout_marginTop="30dp"
+                android:background="#770E06"
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="38dp"
-                android:layout_marginTop="-68dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="50dp"
-                android:text="Name" />
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <EditText
-                android:id="@+id/about"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:background="#ebedeb"
-                android:drawableLeft="@drawable/ic_baseline_info_24"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="About"
-                android:inputType="textMultiLine"
-                android:padding="15dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@android:color/tab_indicator_text"
-                android:textColorHint="@android:color/secondary_text_dark"
-                android:textSize="20sp"
-                app:drawableTint="@color/colorPrimary" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/about_us"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="38dp"
-                android:layout_marginTop="-68dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="50dp"
-                android:text="About" />
+                </LinearLayout>
 
-            <EditText
-                android:id="@+id/txtMobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:background="#ebedeb"
-                android:drawableLeft="@android:drawable/stat_sys_phone_call"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Mobile Number"
-                android:inputType="textMultiLine"
-                android:padding="15dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@android:color/tab_indicator_text"
-                android:textColorHint="@android:color/secondary_text_dark"
-                android:textSize="20sp"
-                app:drawableTint="@color/colorPrimary" />
+                <LinearLayout
+                    style="@style/parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="6dp">
 
-            <TextView
-                android:id="@+id/mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="38dp"
-                android:layout_marginTop="-68dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="50dp"
-                android:text="Mobile" />
+                    <TextView
+                        style="@style/wrap"
+                        android:text="Logout"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:background="#ebedeb"
-                android:scrollbarSize="2dp"
-                android:drawableLeft="@android:drawable/sym_action_email"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Email ID"
-                android:inputType="textMultiLine"
-                android:padding="15dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@android:color/tab_indicator_text"
-                android:textColorHint="@android:color/secondary_text_dark"
-                android:textSize="20sp"
-                app:drawableTint="@color/colorPrimary" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/emailshow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="38dp"
-                android:layout_marginTop="-68dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="50dp"
-                android:text="Email id" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/saveProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/btn_bg"
-                android:text="Save"
-                android:textColor="@color/white">
-
-            </androidx.appcompat.widget.AppCompatButton>
-
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ad_unit_id">
-            </com.google.android.gms.ads.AdView>
+            </LinearLayout>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/LinearLayout1"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/linear_bg"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="20dp">
-
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="5dp"
-                android:drawableLeft="@android:drawable/ic_lock_idle_lock"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Privacy Policy"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableTint="@android:color/secondary_text_dark" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
 
-            <TextView
-                android:id="@+id/aboutwhatsapp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="5dp"
-                android:drawableLeft="@drawable/ic_baseline_info_24"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="About Us"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableTint="@android:color/secondary_text_dark" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="5dp"
-                android:drawableLeft="?attr/actionModeShareDrawable"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Invite Friend"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableTint="@android:color/secondary_text_dark" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="5dp"
-                android:drawableLeft="@android:drawable/stat_notify_chat"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Notification"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableTint="@android:color/secondary_text_dark" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="5dp"
-                android:drawableLeft="@android:drawable/sym_action_chat"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Help"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableTint="@android:color/secondary_text_dark" />
+                android:text="Powered by @shrishailbagale" />
         </LinearLayout>
-    </RelativeLayout>
+
+    </LinearLayout>
+
 </ScrollView>

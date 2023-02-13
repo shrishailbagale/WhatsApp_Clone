@@ -40,7 +40,8 @@ public class ContactListActivity extends AppCompatActivity {
 
     private void checkPermission(){
         //check condition
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M            && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED){
                 //When Permission is not granted
                 //Request permission
                 ActivityCompat.requestPermissions(ContactListActivity.this,
@@ -51,10 +52,6 @@ public class ContactListActivity extends AppCompatActivity {
                 getContactList();
             }
         }
-
-
-
-
     private void getContactList() {
         //Initialize uri
         Uri uri = ContactsContract.Contacts.CONTENT_URI;

@@ -1,27 +1,32 @@
 package com.example.whatsapp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.whatsapp.Models.Users;
 import com.example.whatsapp.databinding.ActivitySettingsBinding;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,82 +46,142 @@ public class SettingsActivity extends AppCompatActivity {
     FirebaseStorage storage;
     FirebaseAuth auth;
     FirebaseDatabase database;
+    ProgressDialog progressDialog;
 
-    private Toolbar toolbar;
     private FirebaseAnalytics mFirebaseAnalytics;
-    private AdView mAdView;
-
-    TextView about;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-//        toolbar = (Toolbar) findViewById(R.id.toolbarSetting);
-//        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-5413988332027050/9974979865");
-        // TODO: Add adView to your view hierarchy.
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
-
-            }
-        });
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().hide();
+        setTitle("Setting");
 
         storage = FirebaseStorage.getInstance();
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
-        binding.backArrow.setOnClickListener(new View.OnClickListener() {
+        binding.help.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+            public void onClick(View v) {
+                Intent intent1 = new Intent(SettingsActivity.this, HelpActivity.class);
+                startActivity(intent1);
+            }
+        });
+
+        binding.appInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(SettingsActivity.this, AboutActivity.class);
+                startActivity(intent1);
+
+            }
+        });
+        binding.feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(SettingsActivity.this, FeedbackActivity.class);
+                startActivity(intent1);
+
+            }
+        });
+
+        binding.myProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsActivity.this, ProfileViewActivity.class);
                 startActivity(intent);
+
             }
         });
 
-        about = (TextView) findViewById(R.id.aboutwhatsapp);
-
-        about.setOnClickListener(new View.OnClickListener() {
+        binding.deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SettingsActivity.this, AboutUsActivity.class);
-                startActivity(i);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                builder.setTitle("Are you sure?").setMessage("Account delete permanently");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        progressDialog = new ProgressDialog(SettingsActivity.this);
+                        progressDialog.setTitle("Please wait...");
+                        progressDialog.setMessage("We are delete your Account");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
+
+                        FirebaseDatabase.getInstance().getReference()
+                                .child("Users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .setValue(null)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        FirebaseAuth.getInstance().getCurrentUser().delete()
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()){
+                                                            progressDialog.dismiss();
+                                                            Intent intent = new Intent(SettingsActivity.this, SignUpActivity.class);
+                                                            startActivity(intent);
+                                                        }
+                                                        else{
+                                                            Toast.makeText(SettingsActivity.this, "Please try again later", Toast.LENGTH_SHORT).show();
+                                                            progressDialog.dismiss();
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                });
+                    }
+                });
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).show();
+
+
+
             }
         });
 
-        binding.saveProfile.setOnClickListener(new View.OnClickListener() {
+        binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String about = binding.about.getText().toString();
-                String name = binding.txtUsername.getText().toString();
-                String mobi = binding.txtMobile.getText().toString();
-                String email = binding.txtEmail.getText().toString();
-
-                HashMap<String , Object> obj = new HashMap<>();
-                obj.put("username", name );
-                obj.put("about", about);
-                obj.put("mobile", mobi);
-                obj.put("mail", email);
-
-                database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
-                        .updateChildren(obj);
-                Toast.makeText(SettingsActivity.this, "Profile Saved!", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                builder.setTitle("Are you sure logout");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        progressDialog = new ProgressDialog(SettingsActivity.this);
+                        progressDialog.setTitle("Please wait...");
+                        progressDialog.setMessage("We are logout...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
+                        auth.signOut();
+                        Intent intent = new Intent(SettingsActivity.this  , SignInActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).show();
             }
         });
 
@@ -130,8 +195,6 @@ public class SettingsActivity extends AppCompatActivity {
                                         .into(binding.profileImage);
                                 binding.about.setText(users.getAbout());
                                 binding.txtUsername.setText(users.getUsername());
-                                binding.txtMobile.setText(users.getMobile());
-                                binding.txtEmail.setText(users.getMail());
                             }
 
                             @Override
@@ -139,15 +202,6 @@ public class SettingsActivity extends AppCompatActivity {
                             }
                         });
 
-        binding.changeProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");  // */*
-                startActivityForResult(intent, 33);
-            }
-        });
     }
 
     @Override
@@ -156,6 +210,12 @@ public class SettingsActivity extends AppCompatActivity {
         if (data.getData() != null){
             Uri sFile = data.getData();
             binding.profileImage.setImageURI(sFile);
+
+            progressDialog = new ProgressDialog(SettingsActivity.this);
+            progressDialog.setTitle("Please wait...");
+            progressDialog.setMessage("Profile photo updating...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
             final StorageReference reference = storage.getReference().child("profile_pictures")
                     .child(FirebaseAuth.getInstance().getUid());
@@ -168,16 +228,22 @@ public class SettingsActivity extends AppCompatActivity {
                         @SuppressLint("WrongViewCast")
                         @Override
                         public void onSuccess(Uri uri) {
+                            progressDialog.dismiss();
 
                             database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                                     .child("profilephoto").setValue(uri.toString());
-                            Toast.makeText(SettingsActivity.this, "Image Uploaded!", Toast.LENGTH_SHORT).show();
-
-
+                            Toast.makeText(SettingsActivity.this, "Profile photo Uploaded!", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             });
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_setting , menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

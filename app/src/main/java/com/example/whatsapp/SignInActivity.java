@@ -102,6 +102,14 @@ public class SignInActivity<idToken> extends AppCompatActivity {
             }
         });
 
+        binding.btnMobile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignInActivity.this, SendOTPActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
 
         binding.btnGoogle.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +148,7 @@ public class SignInActivity<idToken> extends AppCompatActivity {
                 GoogleSignInAccount account  = task.getResult(ApiException.class);
                 Log.d("TAG", "firebaseAuthWithGoogle:success" +account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
+
                 // }
             } catch (ApiException e) {
                 Log.w("TAG", "Google login Failed!",e);
@@ -167,6 +176,7 @@ public class SignInActivity<idToken> extends AppCompatActivity {
                         Users users = new Users();
                         users.setUserId(user.getUid());
                         users.setUsername(user.getDisplayName());
+                        users.setMobile(user.getPhoneNumber());
                         users.setProfilephoto(user.getPhotoUrl().toString());
 
                         database.getReference().child("Users").child(user.getUid()).setValue(users);

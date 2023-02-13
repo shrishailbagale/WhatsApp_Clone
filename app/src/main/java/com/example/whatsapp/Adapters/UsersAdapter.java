@@ -25,21 +25,18 @@ import java.util.ArrayList;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
 
-
     ArrayList<Users> list ;
     Context context;
 
     public UsersAdapter(ArrayList<Users> list, Context context) {
         this.list = list;
-        this.context = context;
-    }
+        this.context = context;}
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.sample_show_user , parent , false);
-
         return new ViewHolder(view);
     }
 
@@ -52,22 +49,20 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
 
         FirebaseDatabase.getInstance().getReference()
                 .child("chats").child(FirebaseAuth.getInstance()
-                .getUid() + users.getUserId()).orderByChild("timestamp").limitToLast(1)
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.hasChildren()){
-                                    for (DataSnapshot snapshot1: snapshot.getChildren()){
-                                        holder.lastMessage.setText(snapshot1.child("message").getValue(String.class).toString());
-                                    }
-                                }
+                        .getUid() + users.getUserId()).orderByChild("timestamp").limitToLast(1)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.hasChildren()){
+                            for (DataSnapshot snapshot1: snapshot.getChildren()){
+                                holder.lastMessage.setText(snapshot1.child("message").getValue(String.class).toString());
                             }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,8 +72,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
                 intent.putExtra("userId", users.getUserId());
                 intent.putExtra("profilephoto" , users.getProfilephoto());
                 intent.putExtra("username" , users.getUsername());
-                context.startActivity(intent);
 
+                context.startActivity(intent);
             }
         });
     }
@@ -86,12 +81,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
     @Override
     public int getItemCount() {
         return list.size();
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image;
-        TextView username, lastMessage;
+        TextView username, lastMessage, lasTime;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

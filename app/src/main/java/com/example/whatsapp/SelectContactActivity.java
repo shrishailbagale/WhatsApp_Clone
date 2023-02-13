@@ -20,18 +20,16 @@ import java.util.ArrayList;
 public class SelectContactActivity extends AppCompatActivity {
 
     TextView s_phonebook;
-   ArrayList<String> arrayList;
+    ArrayList<String> arrayList;
 
-
-
-    @SuppressLint("MissingInflatedId")
+   @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_contact);
-        getSupportActionBar().hide();
-
         s_phonebook = (TextView) findViewById(R.id.phonebook);
+        setTitle("Contact Details");
+
         // to initilize the memory to arraylist
 
         arrayList = new ArrayList<String>();
@@ -62,8 +60,10 @@ public class SelectContactActivity extends AppCompatActivity {
             @SuppressLint("Range") String name= cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
             @SuppressLint("Range") String mobile = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
+
+
             // now ad the data into arraylist
-            arrayList.add(name + "\n"+ mobile);
+            arrayList.add((name) + "\n"+ mobile+"\n\n");
             //to attach the arraylist into texview
             s_phonebook.setText(arrayList.toString());
         }

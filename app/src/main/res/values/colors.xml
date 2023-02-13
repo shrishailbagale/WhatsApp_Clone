@@ -6,11 +6,13 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
-    <color name="colorPrimary" >#750446</color>
-<!--    #08615c-->
+    <color name="colorPrimary" >#08615c</color>
+<!-- #750446    #08615c-->
     <color name="colorPrimaryDark">#08615c</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFF</color>
+    <color name="whiteSecondry">#BCBCBC</color>
+
     <color name="lightGrey">#EDEDED</color>
     <color name="whatsAppColor">#08615c</color>
     <color name="red">#FF0000</color>
@@ -20,6 +22,12 @@
     <color name="lightgreen">#e5ffcc</color>
     <color name="settingsIconColor">#0E8374</color>
     <color name="grayBackground">#BCBCBC</color>
+    <color name="logocolor">#2d3e50</color>
     <color name="chatbackground">#AAAAAA</color>
     <color name="bg">#ebedeb</color>
+
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="accent">#F44336</color>
 </resources>

@@ -2,15 +2,28 @@ package com.example.whatsapp.Models;
 
 public class Users {
 
-    String profilephoto, username, mail, mobile, password, userId, lastMessage, about;
+    String profilephoto, username, mail, mobile, password, userId, about;
+    Long timestamp;
 
-    public Users(String profilephoto, String username, String mail,String mobile, String password, String lastMessage) {
+    public Users(String profilephoto, String username, String mail,String mobile,String password, String lastMessage) {
         this.profilephoto = profilephoto;
         this.username = username;
         this.mail = mail;
         this.mobile = mobile;
         this.password = password;
-        this.lastMessage = lastMessage;
+        this.timestamp = timestamp;
+    }
+
+    public Users(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Users() {
@@ -18,10 +31,11 @@ public class Users {
     }
 
     //Signup constructor
-    public Users(String username, String mail, String mobile,String password) {
+    public Users(String username, String mail, String about, String mobile,String password) {
         this.username = username;
         this.mail = mail;
         this.mobile = mobile;
+        this.about = about;
         this.password = password;
     }
 
@@ -73,13 +87,6 @@ public class Users {
 
     public void setUserId(String userId) { this.userId = userId; }
 
-    public String getLastMessage() {
-        return lastMessage;
-    }
-
-    public void setLastMessage(String lastMessage) {
-        this.lastMessage = lastMessage;
-    }
 
 
 

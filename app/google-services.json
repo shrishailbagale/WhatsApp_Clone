@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:50479040200:android:823901c08ffe9596a387fd",
+        "android_client_info": {
+          "package_name": "com.example.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50479040200-pmtnu270kg2chvm1mdkuf9rc7f4tbmin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsRFDRi683NU9j7OlrrXegw_pCo25g8no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50479040200-pmtnu270kg2chvm1mdkuf9rc7f4tbmin.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:50479040200:android:7af719557fd26ad8a387fd",
         "android_client_info": {
           "package_name": "com.example.whatsapp"
