@@ -52,8 +52,5 @@ public class UserDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
-
 }

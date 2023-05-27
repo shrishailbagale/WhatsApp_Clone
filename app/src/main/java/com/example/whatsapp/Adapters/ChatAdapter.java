@@ -88,7 +88,7 @@ public class ChatAdapter extends  RecyclerView.Adapter {
 
 
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        String senderRoom = FirebaseAuth.getInstance().getCurrentUser().getUid()+ recieverId;
+                        String senderRoom = FirebaseAuth.getInstance().getCurrentUser().getUid() + recieverId;
                         database.getReference().child("chats").child(senderRoom).removeValue().isSuccessful();
                                // .child(messageModel.getMessage()).setValue(equals(""));
                     }
@@ -140,6 +140,7 @@ public class ChatAdapter extends  RecyclerView.Adapter {
             recieverTime = itemView.findViewById(R.id.recieverTime);
         }
     }
+
 
     public static class SenderViewHolder extends  RecyclerView.ViewHolder{
 
