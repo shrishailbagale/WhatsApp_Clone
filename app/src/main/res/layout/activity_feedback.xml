@@ -15,6 +15,7 @@
         android:textSize="20dp"
         android:text="Feedback page" />
 
+<<<<<<< HEAD
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
@@ -28,4 +29,6 @@
 
 
 
+=======
+>>>>>>> c68f89b5ef5eeab1201d9de52197ff4f54028cd5
 </LinearLayout>

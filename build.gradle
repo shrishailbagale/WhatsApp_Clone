@@ -5,7 +5,11 @@ buildscript {
     }
     dependencies {
         classpath 'com.google.gms:google-services:4.3.15'
+<<<<<<< HEAD
         classpath 'com.android.tools.build:gradle:7.4.1'
+=======
+        classpath 'com.android.tools.build:gradle:7.4.2'
+>>>>>>> c68f89b5ef5eeab1201d9de52197ff4f54028cd5
 
     }
 }
