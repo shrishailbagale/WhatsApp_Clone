@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.Switch;
 import android.widget.Toast;
 
 
@@ -51,6 +52,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class ChatDetailActivity extends AppCompatActivity  {
+
+    String recieverId;
 
     ActivityChatDetailBinding binding;
     FirebaseDatabase database;
@@ -163,11 +166,6 @@ public class ChatDetailActivity extends AppCompatActivity  {
                     }
                 });
 
-
-
-
-
-
         binding.send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,31 +205,58 @@ public class ChatDetailActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+
+        binding.btnchatmenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Initializing the popup menu and giving the reference as current context
+                PopupMenu popupMenu = new PopupMenu(ChatDetailActivity.this,binding.btnchatmenu);
+
+                // Inflating popup menu from popup_menu.xml file
+                popupMenu.getMenuInflater().inflate(R.menu.chat_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+
+                        switch (menuItem.getItemId()){
+                            case  R.id.clearchat:
+                                showDialogMenu();
+                                break;
+
+                            case R.id.wallpaper:
+                                Toast.makeText(ChatDetailActivity.this, "Wallpaper Clicked", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                // Showing the popup menu
+                popupMenu.show();
+            }
+        });
     }
 
+    public void showDialogMenu() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Clear this chat?").setMessage("Message will only be removed from this device");
 
-    public void showPopupMenu(View view){
-        PopupMenu popupMenu = new PopupMenu(this,view);
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.chat_menu, popupMenu.getMenu());
-        popupMenu.show();
-    }
+        builder.setPositiveButton("Clear Chat", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()){
-            case  R.id.clearchat:
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                String senderRoom = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String senderRoom = FirebaseAuth.getInstance().getCurrentUser().getUid() + recieverId;
                 database.getReference().child("chats").child(senderRoom).removeValue().isSuccessful();
-                break;
-
-            case R.id.wallpaper:
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+                Toast.makeText(ChatDetailActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 
     @Override
@@ -242,18 +267,13 @@ public class ChatDetailActivity extends AppCompatActivity  {
                 image_uri = data.getData();
                 sentImageMessage();
                 Toast.makeText(this, "Yes", Toast.LENGTH_SHORT).show();
-
             }
             if (resultCode == IMAGE_PICK_CAMERA_CODE){
 
                 sentImageMessage();
-
-
             }
         }
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

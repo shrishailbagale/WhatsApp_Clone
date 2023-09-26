@@ -3,6 +3,9 @@
     <string name="author">Shrishail Bagale</string>
 
     <string name="banner_ad_unit_id">ca-app-pub-5413988332027050/9974979865</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-5413988332027050/7303897724</string>
+
+
 
     <string name="we_will_send_you_an_one_time_password_on_this_mobile_number">We will send you an One Time Password on this mobile number</string>
     <string name="_91">+91 - </string>
