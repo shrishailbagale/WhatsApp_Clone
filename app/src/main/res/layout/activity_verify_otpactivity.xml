@@ -26,8 +26,7 @@
             android:layout_marginTop="30dp"
             android:text="@string/otp_verification"
             android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/text_primary"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -37,8 +36,7 @@
             android:layout_marginEnd="50dp"
             android:gravity="center"
             android:text="@string/enter_the_otp_sent_to"
-            android:textSize="14sp"
-            android:textColor="@color/text_secondary"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/textMobile"
@@ -161,7 +159,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/didn_t_receive_the_otp"
-                android:textColor="@color/text_secondary"
                 android:textSize="14sp"/>
 
             <TextView

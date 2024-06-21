@@ -2,6 +2,7 @@ package com.example.whatsapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,12 +10,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.whatsapp.Models.Users;
 import com.example.whatsapp.databinding.ActivityProfileViewBinding;
-import com.example.whatsapp.databinding.ActivitySettingsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,12 +42,18 @@ public class ProfileViewActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
 
+    private String initialUsername;
+    private String initialAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_view);
-        setTitle("Profile");
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true); // Enable back button
+            actionBar.setTitle("Profile");
+        }
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
@@ -56,6 +64,8 @@ public class ProfileViewActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
+        binding.saveProfile.setVisibility(View.GONE); // Hide the update button initially
+
         binding.saveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,15 +75,22 @@ public class ProfileViewActivity extends AppCompatActivity {
                 String mobi = binding.txtMobile.getText().toString();
                 String email = binding.txtEmail.getText().toString();
 
-                HashMap<String , Object> obj = new HashMap<>();
-                obj.put("username", name );
+                HashMap<String, Object> obj = new HashMap<>();
+                obj.put("username", name);
                 obj.put("about", about);
                 obj.put("mobile", mobi);
                 obj.put("mail", email);
 
                 database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
-                        .updateChildren(obj);
-                Toast.makeText(ProfileViewActivity.this, "Profile Saved!", Toast.LENGTH_SHORT).show();
+                        .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(ProfileViewActivity.this, "Profile Saved!", Toast.LENGTH_SHORT).show();
+                                binding.saveProfile.setVisibility(View.GONE); // Hide the button after update
+                                initialUsername = name; // Update initial values
+                                initialAbout = about;
+                            }
+                        });
             }
         });
 
@@ -81,7 +98,6 @@ public class ProfileViewActivity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                         Users users = snapshot.getValue(Users.class);
                         Picasso.get().load(users.getProfilephoto()).placeholder(R.drawable.profile)
                                 .into(binding.profileImage);
@@ -89,6 +105,12 @@ public class ProfileViewActivity extends AppCompatActivity {
                         binding.txtUsername.setText(users.getUsername());
                         binding.txtMobile.setText(users.getMobile());
                         binding.txtEmail.setText(users.getMail());
+
+                        // Save the initial values
+                        initialUsername = users.getUsername();
+                        initialAbout = users.getAbout();
+
+                        addTextChangeListeners();
                     }
 
                     @Override
@@ -101,16 +123,42 @@ public class ProfileViewActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_PICK);
-                intent.setType("image/*");  // */*
+                intent.setType("image/*");
                 startActivityForResult(intent, 1000);
             }
         });
     }
 
+    private void addTextChangeListeners() {
+        binding.txtUsername.addTextChangedListener(textWatcher);
+        binding.about.addTextChangedListener(textWatcher);
+    }
+
+    private final TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String currentUsername = binding.txtUsername.getText().toString();
+            String currentAbout = binding.about.getText().toString();
+
+            // Show the update button if there are changes
+            if (!currentUsername.equals(initialUsername) || !currentAbout.equals(initialAbout)) {
+                binding.saveProfile.setVisibility(View.VISIBLE);
+            } else {
+                binding.saveProfile.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {}
+    };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data.getData() != null){
+        if (data != null && data.getData() != null) {
             Uri sFile = data.getData();
             binding.profileImage.setImageURI(sFile);
 
@@ -126,18 +174,14 @@ public class ProfileViewActivity extends AppCompatActivity {
             reference.putFile(sFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
                     reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @SuppressLint("WrongViewCast")
                         @Override
                         public void onSuccess(Uri uri) {
                             progressDialog.dismiss();
-
                             database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                                     .child("profilephoto").setValue(uri.toString());
                             Toast.makeText(ProfileViewActivity.this, "Profile photo Uploaded!", Toast.LENGTH_SHORT).show();
-
-
                         }
                     });
                 }

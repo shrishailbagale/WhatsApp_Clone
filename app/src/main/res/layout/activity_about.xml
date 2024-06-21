@@ -32,10 +32,9 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="80dp"
-        android:layout_marginTop="20dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="30dp"
         app:srcCompat="@drawable/logosb" />
 
     <TextView
@@ -44,10 +43,10 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@color/text_secondary"
-        android:text="© 2022-2023 Powered by @shrishailbagale" />
+        android:text="© 2022-2023 Developed by Shrishail Bagale" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/more"
         android:layout_width="wrap_content"
         android:layout_margin="10dp"
         android:layout_height="wrap_content"

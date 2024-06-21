@@ -3,7 +3,6 @@ package com.example.whatsapp;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,10 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +20,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.whatsapp.Models.Users;
 import com.example.whatsapp.databinding.ActivitySettingsBinding;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -38,8 +42,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
-
 public class SettingsActivity extends AppCompatActivity {
 
     ActivitySettingsBinding binding;
@@ -47,9 +49,12 @@ public class SettingsActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     ProgressDialog progressDialog;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
     private FirebaseAnalytics mFirebaseAnalytics;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,14 @@ public class SettingsActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {}
+        });
 
         binding.help.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,11 +118,26 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         binding.deleteAccount.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
+                InterstitialAd.load(getApplicationContext(), "ca-app-pub-5413988332027050/7303897724", adRequest, new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // this method is called when ad is loaded in that case we are displaying our ad.
+                        interstitialAd.show(SettingsActivity.this);
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // this method is called when we get any error
+                        Toast.makeText(SettingsActivity.this, "Fail to load ad..", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("Are you sure?").setMessage("Account delete permanently");
+                builder.setTitle("Are you sure?").setMessage("Permanently account delete");
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -157,33 +185,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        binding.logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("Are you sure logout");
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        progressDialog = new ProgressDialog(SettingsActivity.this);
-                        progressDialog.setTitle("Please wait...");
-                        progressDialog.setMessage("We are logout...");
-                        progressDialog.setCancelable(false);
-                        progressDialog.show();
-                        auth.signOut();
-                        Intent intent = new Intent(SettingsActivity.this  , SignInActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                }).show();
-            }
-        });
 
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -246,4 +247,36 @@ public class SettingsActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_setting , menu);
         return super.onCreateOptionsMenu(menu);
     }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case  R.id.logout:
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                builder.setTitle("Logout").setMessage("Are you sure?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        progressDialog = new ProgressDialog(SettingsActivity.this);
+                        progressDialog.setTitle("Please wait...");
+                        progressDialog.setMessage("We are logout...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
+                        auth.signOut();
+                        Intent intent = new Intent(SettingsActivity.this  , SignInActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

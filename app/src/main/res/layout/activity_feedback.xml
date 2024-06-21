@@ -7,6 +7,14 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".FeedbackActivity">
+    <Button
+        android:id="@+id/idBtnDisplayAd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:text="Display Ad"
+        android:textAllCaps="false" />
 
     <TextView
         android:id="@+id/textView"
@@ -15,7 +23,9 @@
         android:textSize="20dp"
         android:text="Feedback page" />
 
-<<<<<<< HEAD
+
+
+
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
@@ -27,8 +37,4 @@
         ads:adUnitId="@string/banner_ad_unit_id">
     </com.google.android.gms.ads.AdView>
 
-
-
-=======
->>>>>>> c68f89b5ef5eeab1201d9de52197ff4f54028cd5
 </LinearLayout>

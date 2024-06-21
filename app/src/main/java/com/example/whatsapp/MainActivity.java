@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.app.Activity;
@@ -13,6 +14,7 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 
+import com.example.whatsapp.databinding.ActivityMainBinding;
 import com.google.android.gms.location.LocationRequest;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,13 +22,10 @@ import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.whatsapp.Adapters.FragmentsAdapter;
-import com.example.whatsapp.databinding.ActivityMainBinding;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -38,6 +37,7 @@ import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.database.DatabaseReference;
@@ -47,12 +47,14 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView btnContact;
     ActivityMainBinding binding;
     FirebaseAuth auth;
     private LocationRequest locationRequest;
     TextView longi;
     TextView lati;
+    private ViewPager viewPager;
+    private BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setElevation(NullPointerException);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+
+        // Load the animation from the XML resource
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -77,18 +83,57 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         binding.viewPager.setAdapter(new FragmentsAdapter(getSupportFragmentManager()));
-        binding.tablayout.setupWithViewPager(binding.viewPager);
+//        binding.tablayout.setupWithViewPager(binding.viewPager);
 
-        btnContact =(ImageView) findViewById(R.id.btnContactList);
+        viewPager = findViewById(R.id.viewPager);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        //Contact button
-        btnContact.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,  SelectContactActivity.class);
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_chats:
+                        viewPager.setCurrentItem(0);
+                        return true;
+                    case R.id.menu_status:
+                        viewPager.setCurrentItem(1);
+                        return true;
+                    case R.id.menu_calls:
+                        viewPager.setCurrentItem(2);
+                        return true;
+                    default:
+                        return false;
+                }
             }
         });
+
+        viewPager.setAdapter(new FragmentsAdapter(getSupportFragmentManager()));
+
+        // Optionally handle swipes to change tabs
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        bottomNavigationView.setSelectedItemId(R.id.menu_chats);
+                        break;
+                    case 1:
+                        bottomNavigationView.setSelectedItemId(R.id.menu_status);
+                        break;
+                    case 2:
+                        bottomNavigationView.setSelectedItemId(R.id.menu_calls);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {}
+        });
+
+
     }
 
 
@@ -110,6 +155,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.groupChat:
                 Intent intentt = new Intent(MainActivity.this  , GroupChatActivity.class);
                 startActivity(intentt);
+                break;
+            case R.id.profileView:
+                Intent profile = new Intent(MainActivity.this  , ProfileViewActivity.class);
+                startActivity(profile);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -243,4 +292,5 @@ public class MainActivity extends AppCompatActivity {
         isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         return isEnabled;
     }
+
 }

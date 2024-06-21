@@ -18,7 +18,7 @@
             android:id="@+id/senderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="6dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="-5dp"
             android:inputType="textLongMessage|textMultiLine"
@@ -27,7 +27,7 @@
             android:minLines="1"
             android:paddingLeft="3dp"
             android:paddingRight="19dp"
-            android:text="Shrishail bagale"
+            android:text="Hi"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -35,7 +35,7 @@
             android:id="@+id/senderTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="18dp"
             android:layout_marginBottom="3dp"
 
 

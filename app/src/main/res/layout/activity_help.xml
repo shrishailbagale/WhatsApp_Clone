@@ -1,17 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-
-    tools:context=".HelpActivity">
+    android:padding="16dp">
 
     <TextView
+        android:id="@+id/helpTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Help centre"/>
+        android:text="Help and Instructions"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/helpContentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/helpTitleTextView"
+        android:layout_marginTop="16dp"
+        android:text="Here are some helpful tips:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/helpTip1TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/helpContentTextView"
+        android:layout_marginTop="8dp"
+        android:text="• Tip 1: Do this first."
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/helpTip2TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/helpTip1TextView"
+        android:layout_marginTop="8dp"
+        android:text="• Tip 2: Follow these steps."
+        android:textSize="16sp" />
+
+    <!-- Add more tips as needed -->
+
+</RelativeLayout>

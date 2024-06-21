@@ -21,16 +21,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
 
     ArrayList<Users> list ;
     Context context;
+    private SimpleDateFormat simpleDateFormat;
 
     public UsersAdapter(ArrayList<Users> list, Context context) {
         this.list = list;
         this.context = context;}
+
 
     @NonNull
     @Override
@@ -53,29 +59,46 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        simpleDateFormat = new SimpleDateFormat("HH:mm a");
                         if(snapshot.hasChildren()){
+                            DataSnapshot lastMessageSnapshot = null;
                             for (DataSnapshot snapshot1: snapshot.getChildren()){
-                                holder.lastMessage.setText(snapshot1.child("message").getValue(String.class).toString());
+                                lastMessageSnapshot = snapshot1;
+                            }
+                            if (lastMessageSnapshot != null) {
+                                String lastMessage = lastMessageSnapshot.child("message").getValue(String.class);
+                                Long timestamp = lastMessageSnapshot.child("timestamp").getValue(Long.class);
+                                if (lastMessage != null) {
+                                    holder.lastMessage.setText(lastMessage);
+                                }
+                                if (timestamp != null) {
+                                    String lastMessageTime = convertTimestampToTime(timestamp);
+                                    holder.lastTime.setText(lastMessageTime);
+                                }
+
                             }
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context , ChatDetailActivity.class);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context , ChatDetailActivity.class);
 
-                intent.putExtra("userId", users.getUserId());
-                intent.putExtra("profilephoto" , users.getProfilephoto());
-                intent.putExtra("username" , users.getUsername());
+                    intent.putExtra("userId", users.getUserId());
+                    intent.putExtra("profilephoto" , users.getProfilephoto());
+                    intent.putExtra("username" , users.getUsername());
 
-                context.startActivity(intent);
-            }
-        });
+
+                    context.startActivity(intent);
+                }
+            });
     }
 
     @Override
@@ -87,7 +110,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image;
-        TextView username, lastMessage, lasTime;
+        TextView username, lastMessage, lastTime;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -96,6 +119,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
             image = itemView.findViewById(R.id.profilephoto);
             username = itemView.findViewById(R.id.username);
             lastMessage = itemView.findViewById(R.id.lastMessage);
+            lastTime = itemView.findViewById(R.id.lastTime);
         }
+    }
+    // Convert timestamp to time
+    private String convertTimestampToTime(Long timestamp) {
+        return simpleDateFormat.format(new Date(timestamp));
     }
 }

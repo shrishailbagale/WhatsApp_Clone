@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.whatsapp.Adapters.ChatAdapter;
 import com.example.whatsapp.Models.MessageModel;
+
 import com.example.whatsapp.databinding.ActivityGroupChatBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

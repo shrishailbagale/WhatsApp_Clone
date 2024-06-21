@@ -81,7 +81,7 @@
 
             android:layout_marginRight="5dp"
             android:src="@drawable/ic_send"
-            android:tint="@color/white" />
+            app:tint="@color/white" />
     </LinearLayout>
 
     <androidx.appcompat.widget.Toolbar
@@ -97,8 +97,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingRight="5dp"
-                android:tint="@color/white"
-                app:srcCompat="@drawable/arrow_left"/>
+                app:srcCompat="@drawable/arrow_left"
+                app:tint="@color/white" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profilephoto"
@@ -122,8 +122,9 @@
             android:layout_gravity="right"
             android:onClick="showPopupMenu"
             android:padding="10dp"
-            android:tint="@color/white"
-            app:srcCompat="@drawable/ic_menu" />
+            app:srcCompat="@drawable/ic_menu"
+            app:tint="@color/white"
+            tools:ignore="OnClick,UsingOnClickInXml" />
 
         <ImageView
             android:id="@+id/btnvideo"
@@ -131,8 +132,8 @@
             android:layout_height="56dp"
             android:layout_gravity="right"
             android:padding="10dp"
-            android:tint="@color/white"
-            app:srcCompat="@drawable/ic_video" />
+            app:srcCompat="@drawable/ic_video"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/btnvoice"
@@ -140,8 +141,8 @@
             android:layout_height="56dp"
             android:layout_gravity="right"
             android:padding="10dp"
-            android:tint="@color/white"
-            app:srcCompat="@drawable/ic_call" />
+            app:srcCompat="@drawable/ic_call"
+            app:tint="@color/white" />
 
     </androidx.appcompat.widget.Toolbar>
 

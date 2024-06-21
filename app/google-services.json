@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "50479040200-pmtnu270kg2chvm1mdkuf9rc7f4tbmin.apps.googleusercontent.com",
+          "client_id": "50479040200-8ps5lhknc8dgjeckcsrkooihj18rg7pm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -28,7 +28,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "50479040200-pmtnu270kg2chvm1mdkuf9rc7f4tbmin.apps.googleusercontent.com",
+              "client_id": "50479040200-8ps5lhknc8dgjeckcsrkooihj18rg7pm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -44,15 +44,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "50479040200-f66j8lcup51cjb55n09k98f6vi4gu960.apps.googleusercontent.com",
+          "client_id": "50479040200-8lovunj0v04ai45au8oqu2tpn18a64en.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.whatsapp",
-            "certificate_hash": "31e18a9a9617f4ea73cab1ca73d83cf385e2ef55"
+            "certificate_hash": "75c4ef2f808dace3885b8fd084c9282136008ddf"
           }
         },
         {
-          "client_id": "50479040200-pmtnu270kg2chvm1mdkuf9rc7f4tbmin.apps.googleusercontent.com",
+          "client_id": "50479040200-8ps5lhknc8dgjeckcsrkooihj18rg7pm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -65,7 +65,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "50479040200-pmtnu270kg2chvm1mdkuf9rc7f4tbmin.apps.googleusercontent.com",
+              "client_id": "50479040200-8ps5lhknc8dgjeckcsrkooihj18rg7pm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -4,25 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/clearchat"
-        android:title="Clear chat"/>
+        android:id="@+id/logout"
+        android:iconTint="@color/white"
+        android:title="Logout" />
 
-    <item
-        android:id="@+id/wallpaper"
-        android:checkable="false"
-        android:checked="false"
-        android:title="Wallpaper " />
 
-    <item
-        android:id="@+id/block"
-        android:checkable="false"
-        android:checked="false"
-        android:title="Block" />
 
-    <item
-        android:id="@+id/more"
-        android:checkable="false"
-        android:checked="false"
-        android:title="More" />
+
 
 </menu>

@@ -21,10 +21,11 @@
 
             <LinearLayout
                 android:id="@+id/myProfile"
-                style="@style/parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:animateLayoutChanges="true"
-                android:background="@android:color/white"
+
                 android:gravity="left"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -52,23 +53,25 @@
 
                     <TextView
                         android:id="@+id/txtUsername"
-                        style="@style/parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="Username"
                         android:textSize="18sp"
                         android:textStyle="bold|normal" />
 
                     <TextView
                         android:id="@+id/about"
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="About" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/account"
-                style="@style/parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@android:color/white"
                 android:gravity="left"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -78,8 +81,9 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        style="@style/match"
-                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
                         android:src="@drawable/ic_key"
                         app:tint="@color/logocolor" />
 
@@ -91,22 +95,24 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Account"
                         android:textSize="16sp"
                         android:textStyle="bold|normal" />
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Security, Delete, Changes" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/privacy"
-                style="@style/parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@android:color/white"
                 android:gravity="left"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -116,7 +122,8 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        style="@style/match"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:padding="10dp"
                         android:src="@drawable/ic_lock"
                         app:tint="@color/logocolor" />
@@ -129,21 +136,23 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Privacy"
                         android:textSize="16sp"
                         android:textStyle="bold|normal" />
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Block contacts, privacy" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/contact"
-                style="@style/parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@android:color/white"
                 android:gravity="left"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -153,7 +162,8 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        style="@style/match"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:padding="10dp"
                         android:src="@drawable/ic_helpcall"
                         app:tint="@color/logocolor" />
@@ -166,21 +176,23 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Contact us"
                         android:textSize="16sp"
                         android:textStyle="bold|normal" />
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Block contacts, privacy" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/feedback"
-                style="@style/parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@android:color/white"
                 android:gravity="left"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -190,7 +202,8 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        style="@style/match"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:padding="10dp"
                         android:src="@drawable/ic_feedback"
                         app:tint="@color/logocolor" />
@@ -203,22 +216,24 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Feedback"
                         android:textSize="16sp"
                         android:textStyle="bold|normal" />
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Give your feedback" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/help"
-                style="@style/parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@android:color/white"
                 android:gravity="left"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -228,7 +243,8 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        style="@style/match"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:padding="10dp"
                         android:src="@drawable/ic_help"
                         app:tint="@color/logocolor" />
@@ -242,23 +258,25 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Help"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Help centre, contact us, privacy policy" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/invite"
-                style="@style/parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/deleteAccount"
                 android:animateLayoutChanges="true"
-                android:background="@android:color/white"
                 android:gravity="left"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -268,7 +286,8 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        style="@style/match"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:padding="10dp"
                         android:src="@drawable/ic_share"
                         app:tint="@color/logocolor" />
@@ -282,23 +301,25 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Invite a friend"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Invite your friends or family" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/deleteAccount"
-                style="@style/parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/invite"
                 android:animateLayoutChanges="true"
-                android:background="@android:color/white"
                 android:gravity="left"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -308,7 +329,8 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        style="@style/match"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:padding="10dp"
                         android:src="@drawable/ic_delete"
                         app:tint="@color/logocolor" />
@@ -321,22 +343,24 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Delete my account"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="My account delete permanently" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/appInfo"
-                style="@style/parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@android:color/white"
                 android:gravity="left"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -346,7 +370,8 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        style="@style/match"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:padding="10dp"
                         android:src="@drawable/ic_baseline_info_24"
                         app:tint="@color/logocolor" />
@@ -360,32 +385,17 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="App info"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        style="@style/wrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="About App" />
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/logout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/background_button"
-                android:layout_gravity="center"
-                android:padding="10dp">
-
-                <TextView
-                    style="@style/wrap"
-                    android:text="Logout"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
             </LinearLayout>
 
         </LinearLayout>
@@ -400,9 +410,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-
-                android:text="Powered by @shrishailbagale" />
+                android:text="Developed by Shrishail Bagale" />
         </LinearLayout>
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id">
+        </com.google.android.gms.ads.AdView>
 
     </LinearLayout>
 

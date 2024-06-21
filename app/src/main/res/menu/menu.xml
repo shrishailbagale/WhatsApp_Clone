@@ -19,5 +19,10 @@
         android:checkable="false"
         android:checked="false"
         android:title="Group chat" />
+    <item
+        android:id="@+id/profileView"
+        android:checkable="false"
+        android:checked="false"
+        android:title="Group chat" />
 
 </menu>
