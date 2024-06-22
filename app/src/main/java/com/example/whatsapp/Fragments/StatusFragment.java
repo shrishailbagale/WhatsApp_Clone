@@ -1,5 +1,6 @@
 package com.example.whatsapp.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.whatsapp.Adapters.StatusAdapter;
 import com.example.whatsapp.Models.Status;
 import com.example.whatsapp.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +48,7 @@ public class StatusFragment extends Fragment {
     private DatabaseReference statusDatabase;
     private StorageReference storageReference;
     private ImageButton editStatusButton, cameraStatusButton;
+    private AdView adView1212;
 
     @Nullable
     @Override
@@ -64,10 +68,16 @@ public class StatusFragment extends Fragment {
 
         loadStatuses();
 
+        //ads
+        adView1212 = view.findViewById(R.id.adView);
+        @SuppressLint("VisibleForTests") AdRequest adRequest = new AdRequest.Builder().build();
+        adView1212.loadAd(adRequest);
+
         editStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pickMedia();
+
+                //pickMedia();
             }
         });
 
@@ -147,5 +157,10 @@ public class StatusFragment extends Fragment {
                 }
             }
         });
+    }
+    @Override
+    public void onDestroy() {
+        adView1212.destroy();
+        super.onDestroy();
     }
 }

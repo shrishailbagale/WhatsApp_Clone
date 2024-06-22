@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chatRecyclarView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRecyclarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </ScrollView>
 
@@ -33,9 +33,24 @@
             android:layout_height="50dp"
             android:background="@drawable/circle_background"
             android:src="@drawable/ic_newchat"
-            android:contentDescription="camera_status"
+            android:contentDescription="cantact"
             android:scaleType="centerInside"
             ads:tint="@color/exo_white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:padding="16dp">
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_chat" />
     </LinearLayout>
 
 

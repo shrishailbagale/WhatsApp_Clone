@@ -40,8 +40,6 @@ public class FeedbackActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {}
         });
 
-
-
         // on below line initializing variables.
         displayAdBtn = findViewById(R.id.idBtnDisplayAd);
         // on below line creating and initializing variable for adRequest

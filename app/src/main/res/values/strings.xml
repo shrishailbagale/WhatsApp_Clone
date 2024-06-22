@@ -2,7 +2,10 @@
     <string name="app_name">WhatsApp</string>
     <string name="author">Shrishail Bagale</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-5413988332027050/9974979865</string>
+    <string name="banner_setting">ca-app-pub-5413988332027050/9974979865</string>
+    <string name="banner_feedback">ca-app-pub-5413988332027050/3832298488</string>
+    <string name="banner_chat">ca-app-pub-5413988332027050/9829863416</string>
+    <string name="banner_status">ca-app-pub-5413988332027050/9017515868</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-5413988332027050/7303897724</string>
 
     <string name="admob_interstitial_id">ca-app-pub-5413988332027050/7303897724</string>

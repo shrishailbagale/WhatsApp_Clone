@@ -1,7 +1,6 @@
+//ChatsFragment .java
 package com.example.whatsapp.Fragments;
-
-
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,10 @@ import com.example.whatsapp.Adapters.UsersAdapter;
 
 import com.example.whatsapp.Models.Users;
 
+import com.example.whatsapp.R;
 import com.example.whatsapp.databinding.FragmentChatsBinding;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,8 +44,8 @@ public class ChatsFragment extends Fragment {
     FirebaseDatabase database;
     FirebaseAuth auth;
     FirebaseUser firebaseUser;
+    private AdView adView1213;
 
-    ImageView btnContact;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +57,10 @@ public class ChatsFragment extends Fragment {
         database= FirebaseDatabase.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        //ads
+        adView1213 = binding.adView.findViewById(R.id.adView);
+        @SuppressLint("VisibleForTests") AdRequest adRequest = new AdRequest.Builder().build();
+        adView1213.loadAd(adRequest);
 
         UsersAdapter adapter = new UsersAdapter(list, getContext());
         binding.chatRecyclarView.setAdapter(adapter);
@@ -83,6 +89,13 @@ public class ChatsFragment extends Fragment {
             }
         });
 
+
+
         return binding.getRoot();
+    }
+    @Override
+    public void onDestroy() {
+        adView1213.destroy();
+        super.onDestroy();
     }
 }

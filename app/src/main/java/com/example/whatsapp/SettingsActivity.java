@@ -279,4 +279,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onDestroy() {
+        mAdView.destroy();
+        super.onDestroy();
+    }
+
+
 }

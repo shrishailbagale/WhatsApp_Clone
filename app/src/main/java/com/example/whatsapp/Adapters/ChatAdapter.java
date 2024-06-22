@@ -1,3 +1,5 @@
+//ChatAdapter.java
+
 package com.example.whatsapp.Adapters;
 
 import android.app.AlertDialog;
@@ -90,7 +92,7 @@ public class ChatAdapter extends  RecyclerView.Adapter {
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         String senderRoom = FirebaseAuth.getInstance().getCurrentUser().getUid() + recieverId;
                         database.getReference().child("chats").child(senderRoom).removeValue().isSuccessful();
-                               // .child(messageModel.getMessage()).setValue(equals(""));
+                        // .child(messageModel.getMessage()).setValue(equals(""));
                     }
                 });
                 builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
