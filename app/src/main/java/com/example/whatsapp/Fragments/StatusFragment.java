@@ -20,6 +20,8 @@ import com.example.whatsapp.Models.Status;
 import com.example.whatsapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class StatusFragment extends Fragment {
 
@@ -61,7 +67,7 @@ public class StatusFragment extends Fragment {
         editStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //pickMedia();
+                pickMedia();
             }
         });
 
@@ -125,7 +131,11 @@ public class StatusFragment extends Fragment {
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
                                 Uri downloadUri = task.getResult();
-                                Status status = new Status("My Status", "Just now", downloadUri.toString(), isVideo);
+                                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                                String userName = currentUser != null ? currentUser.getDisplayName() : "Unknown";
+                                String currentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
+
+                                Status status = new Status(userName, currentTime, downloadUri.toString(), isVideo);
                                 statusDatabase.child(mediaId).setValue(status);
                             } else {
                                 Toast.makeText(getContext(), "Failed to get download URL", Toast.LENGTH_SHORT).show();

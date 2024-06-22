@@ -1,5 +1,6 @@
 package com.example.whatsapp.Adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         return statuses.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setStatuses(List<Status> statuses) {
         this.statuses = statuses;
         notifyDataSetChanged();
