@@ -152,10 +152,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
 
-            case R.id.groupChat:
-                Intent intentt = new Intent(MainActivity.this  , GroupChatActivity.class);
-                startActivity(intentt);
-                break;
+//            case R.id.groupChat:
+//                Intent intentt = new Intent(MainActivity.this  , GroupChatActivity.class);
+//                startActivity(intentt);
+//                break;
             case R.id.profileView:
                 Intent profile = new Intent(MainActivity.this  , ProfileViewActivity.class);
                 startActivity(profile);

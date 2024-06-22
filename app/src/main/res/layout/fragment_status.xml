@@ -1,111 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.StatusFragment">
 
-
     <ScrollView
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/l1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+                android:paddingBottom="16dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profilephoto"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="6dp"
+                    android:id="@+id/my_status_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="16dp"
                     android:src="@drawable/profile"
-                    app:civ_border_color="#FF000000" />
+                    android:contentDescription="my_status"/>
 
                 <LinearLayout
-                    android:id="@+id/myStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:paddingLeft="5dp">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/my_status_image"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/username"
+                        android:id="@+id/my_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="My status"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorPrimary"/>
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
 
                     <TextView
-                        android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="2dp"
-                        android:layout_marginRight="10dp"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        android:text="Tap to add status update" />
-
+                        android:text="Tap to add status update"
+                        android:textSize="14sp"
+                        android:textColor="#888888"/>
                 </LinearLayout>
+            </RelativeLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/l3"
-                android:layout_below="@id/l1"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:text="Viewed updates"
+                android:textSize="14sp"
+                android:textColor="#888888"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:paddingTop="2dp"
-                    android:text="Recent updates"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recentStatusRecyclarView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/status_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:paddingTop="2dp"
-                    android:text="Viewed updates"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/viewedStatusRecyclarView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
+        </LinearLayout>
     </ScrollView>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <ImageButton
+            android:id="@+id/edit_status"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/circle_background"
+            android:backgroundTint="@color/whiteSecondry"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="edit_status"
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerInside"/>
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/camera_status"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/circle_background"
+            android:src="@drawable/ic_camera1"
+            android:contentDescription="camera_status"
+            android:scaleType="centerInside"
+            app:tint="@color/exo_white" />
+    </LinearLayout>
+</RelativeLayout>

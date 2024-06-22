@@ -8,21 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!-- Your existing content layout -->
-    <!--android:elevation="16dp"/>-->
-
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/tablayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="56dp"-->
-<!--        android:background="@color/colorPrimary"-->
-<!--        app:tabGravity="fill"-->
-<!--        app:tabIndicatorColor="@color/white"-->
-<!--        app:tabMaxWidth="0dp"-->
-<!--        app:tabMinWidth="0dp"-->
-<!--        app:tabMode="fixed"-->
-<!--        app:tabTextColor="@color/white" />-->
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"

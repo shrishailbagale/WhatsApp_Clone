@@ -14,15 +14,15 @@
         android:id="@+id/setting"
         android:title="Setting"/>
 
-    <item
-        android:id="@+id/groupChat"
-        android:checkable="false"
-        android:checked="false"
-        android:title="Group chat" />
+<!--    <item-->
+<!--        android:id="@+id/groupChat"-->
+<!--        android:checkable="false"-->
+<!--        android:checked="false"-->
+<!--        android:title="Group chat" />-->
     <item
         android:id="@+id/profileView"
         android:checkable="false"
         android:checked="false"
-        android:title="Group chat" />
+        android:title="Profile" />
 
 </menu>

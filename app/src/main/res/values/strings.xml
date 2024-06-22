@@ -33,24 +33,24 @@
 
     <!--Main setting start-->
 
-        <string name="account">Account</string>
-        <string name="account_description">Security notifications, change number</string>
-        <string name="privacy">Privacy</string>
-        <string name="privacy_description">Block contacts, disappearing messages</string>
-        <string name="avatar">Avatar</string>
-        <string name="avatar_description">Create, edit, profile photo</string>
-        <string name="chats">Chats</string>
-        <string name="chats_description">Theme, wallpapers, chat history</string>
-        <string name="notifications">Notifications</string>
-        <string name="notifications_description">Message, group and call tones</string>
-        <string name="storage_and_data">Storage and data</string>
-        <string name="storage_and_data_description">Network usage, auto-download</string>
-        <string name="app_language">App language</string>
-        <string name="app_language_description">English (devices language)</string>
-        <string name="help">Help</string>
-        <string name="help_description">Help centre, contact us, privacy policy</string>
-        <string name="invite_a_friend">Invite a friend</string>
-        <string name="invite_a_friend_description">Invite a friend to use this app</string>
-        <string name="profile_picture">Profile Picture</string>
+    <string name="account">Account</string>
+    <string name="account_description">Security notifications, change number</string>
+    <string name="privacy">Privacy</string>
+    <string name="privacy_description">Block contacts, disappearing messages</string>
+    <string name="avatar">Avatar</string>
+    <string name="avatar_description">Create, edit, profile photo</string>
+    <string name="chats">Chats</string>
+    <string name="chats_description">Theme, wallpapers, chat history</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_description">Message, group and call tones</string>
+    <string name="storage_and_data">Storage and data</string>
+    <string name="storage_and_data_description">Network usage, auto-download</string>
+    <string name="app_language">App language</string>
+    <string name="app_language_description">English (devices language)</string>
+    <string name="help">Help</string>
+    <string name="help_description">Help centre, contact us, privacy policy</string>
+    <string name="invite_a_friend">Invite a friend</string>
+    <string name="invite_a_friend_description">Invite a friend to use this app</string>
+    <string name="profile_picture">Profile Picture</string>
 
 </resources>
