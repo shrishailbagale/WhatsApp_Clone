@@ -9,8 +9,8 @@ tools:ignore="MissingDefaultResource">
 
 <de.hdodenhof.circleimageview.CircleImageView
     android:id="@+id/status_image"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
+    android:layout_width="56dp"
+    android:layout_height="56dp"
     android:layout_margin="6dp"
     android:src="@drawable/profile"
     app:civ_border_color="#FF000000" />
@@ -40,7 +40,7 @@ tools:ignore="MissingDefaultResource">
             android:layout_height="wrap_content"
             android:layout_marginRight="52dp"
             android:inputType="textPersonName"
-            android:text="No Mobile" />
+            android:text="time" />
 
     </LinearLayout>
 
@@ -52,9 +52,10 @@ tools:ignore="MissingDefaultResource">
 
         <ImageView
             android:id="@+id/delete_status"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:srcCompat="@drawable/ic_call"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:tint="@color/whiteSecondry"
+            app:srcCompat="@drawable/ic_menu"/>
 
     </LinearLayout>
 
