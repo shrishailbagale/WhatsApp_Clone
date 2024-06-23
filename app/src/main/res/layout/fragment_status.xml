@@ -59,7 +59,7 @@
                 android:text="Viewed updates"
                 android:textSize="14sp"
                 android:textColor="#888888"
-                android:paddingTop="16dp"
+                android:paddingTop="10dp"
                 android:paddingBottom="8dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -72,48 +72,58 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:orientation="vertical"
+        android:gravity="bottom"
+        android:orientation="horizontal"
         android:padding="16dp">
-
-        <ImageButton
-            android:id="@+id/edit_status"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/circle_background"
-            android:backgroundTint="@color/whiteSecondry"
-            android:src="@drawable/ic_edit"
-            android:contentDescription="edit_status"
-            android:layout_marginBottom="16dp"
-            android:scaleType="centerInside"/>
-
-        <ImageButton
-            android:id="@+id/camera_status"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/circle_background"
-            android:src="@drawable/ic_camera1"
-            android:contentDescription="camera_status"
-            android:scaleType="centerInside"
-            app:tint="@color/exo_white" />
-    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:padding="16dp">
+        android:layout_weight="1"
+        android:layout_marginEnd="10dp">
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_status" />
+            ads:adUnitId="@string/banner_status"
+            tools:ignore="NestedWeights" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/edit_status"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/circle_background"
+                android:backgroundTint="@color/whiteSecondry"
+                android:src="@drawable/ic_edit"
+                android:contentDescription="edit_status"
+                android:layout_marginBottom="16dp"
+                android:scaleType="centerInside"/>
+
+            <ImageButton
+                android:id="@+id/camera_status"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/ic_camera1"
+                android:contentDescription="camera_status"
+                android:scaleType="centerInside"
+                app:tint="@color/exo_white" />
+        </LinearLayout>
+
     </LinearLayout>
 
 
