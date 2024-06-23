@@ -2,6 +2,7 @@ package com.example.whatsapp.Fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -128,24 +130,48 @@ public class StatusFragment extends Fragment {
     }
 
     private void uploadMedia(Uri mediaUri) {
+        // Initialize ProgressDialog
+        ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Status Uploading");
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setMax(100);
+        progressDialog.show();
+
         final String mediaId = statusDatabase.push().getKey();
         final boolean isVideo = mediaUri.toString().contains("video");
         final StorageReference mediaRef = storageReference.child(mediaId);
 
-        mediaRef.putFile(mediaUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+        // Upload media file
+        UploadTask uploadTask = mediaRef.putFile(mediaUri);
+
+        // Register observers to listen for when the upload is done or if it fails
+        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                // Calculate progress percentage
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                progressDialog.setProgress((int) progress);
+            }
+        }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                progressDialog.dismiss(); // Dismiss progress dialog once upload is complete
+
                 if (task.isSuccessful()) {
+                    // Handle successful upload
                     mediaRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
                                 Uri downloadUri = task.getResult();
                                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                                String userName = currentUser != null ? currentUser.getDisplayName() : "Unknown";
+                                String username = currentUser != null ? currentUser.getDisplayName() : "Unknown";
+                                String userId = currentUser != null ? currentUser.getUid() : "Unknown";
                                 String currentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
 
-                                Status status = new Status(userName, currentTime, downloadUri.toString(), isVideo);
+                                Status status = new Status(userId, username, currentTime, downloadUri.toString(), isVideo);
                                 statusDatabase.child(mediaId).setValue(status);
                             } else {
                                 Toast.makeText(getContext(), "Failed to get download URL", Toast.LENGTH_SHORT).show();
@@ -153,11 +179,15 @@ public class StatusFragment extends Fragment {
                         }
                     });
                 } else {
+                    // Handle unsuccessful uploads
                     Toast.makeText(getContext(), "Media upload failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
+
+
     @Override
     public void onDestroy() {
         adView1212.destroy();

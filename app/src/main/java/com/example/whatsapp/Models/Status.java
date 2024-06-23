@@ -1,7 +1,9 @@
 package com.example.whatsapp.Models;
 
 public class Status {
-    private String name;
+    private String id;  // Unique identifier for the status
+    private String userId;
+    private String username;
     private String time;
     private String mediaUrl;
     private boolean isVideo;
@@ -10,8 +12,18 @@ public class Status {
         // Default constructor required for calls to DataSnapshot.getValue(Status.class)
     }
 
-    public Status(String name, String time, String mediaUrl, boolean isVideo) {
-        this.name = name;
+    public Status(String id, String userId, String username, String time, String mediaUrl, boolean isVideo) {
+        this.id = id;
+        this.userId = userId;
+        this.username = username;
+        this.time = time;
+        this.mediaUrl = mediaUrl;
+        this.isVideo = isVideo;
+    }
+
+    public Status(String userId, String username, String time, String mediaUrl, boolean isVideo) {
+        this.userId = userId;
+        this.username = username;
         this.time = time;
         this.mediaUrl = mediaUrl;
         this.isVideo = isVideo;
@@ -19,36 +31,30 @@ public class Status {
 
     // Getters and setters for all fields
 
-
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getTime() {
-        return time;
+    public String getUsername() {
+        return username;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getMediaUrl() {
-        return mediaUrl;
-    }
-
-    public void setMediaUrl(String mediaUrl) {
-        this.mediaUrl = mediaUrl;
-    }
-
-    public boolean isVideo() {
-        return isVideo;
-    }
-
-    public void setVideo(boolean video) {
-        isVideo = video;
-    }
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
+    public String getName() { return username; }
+    public void setName(String name) { this.username = name; }
+    public String getTime() { return time; }
+    public void setTime(String time) { this.time = time; }
+    public String getMediaUrl() { return mediaUrl; }
+    public void setMediaUrl(String mediaUrl) { this.mediaUrl = mediaUrl; }
+    public boolean isVideo() { return isVideo; }
+    public void setVideo(boolean video) { isVideo = video; }
 }
