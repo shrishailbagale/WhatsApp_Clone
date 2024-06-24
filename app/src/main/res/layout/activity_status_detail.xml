@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StatusDetailActivity">
+
+    <ImageView
+        android:id="@+id/status_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="Image View"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
+    <VideoView
+        android:id="@+id/status_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</RelativeLayout>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsapp.Models.Status;
 import com.example.whatsapp.R;
+import com.example.whatsapp.StatusDetailActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -50,6 +52,14 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         } else {
             Picasso.get().load(status.getMediaUrl()).into(holder.statusImageView);
         }
+
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), StatusDetailActivity.class);
+            intent.putExtra("mediaUrl", status.getMediaUrl());
+            intent.putExtra("isVideo", status.isVideo());
+            v.getContext().startActivity(intent);
+        });
 
         if (auth.getCurrentUser() != null && auth.getCurrentUser().getUid().equals(status.getUserId())) {
             holder.deleteButton.setVisibility(View.VISIBLE);
