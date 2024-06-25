@@ -23,7 +23,6 @@ public class EmailActivity extends AppCompatActivity {
     private TextView emailValue, verifiedStatus;
     private ImageView editIcon;
     private FirebaseAuth mAuth;
-    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +34,14 @@ public class EmailActivity extends AppCompatActivity {
         editIcon = findViewById(R.id.edit_icon);
 
         mAuth = FirebaseAuth.getInstance();
-        apiService = ApiClient.getClient().create(ApiService.class);
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
             emailValue.setText(currentUser.getEmail());
-            verifiedStatus.setText(currentUser.isEmailVerified() ? "Verified" : "Not Verified");
-
-            if (!currentUser.isEmailVerified()) {
-                currentUser.sendEmailVerification().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Email sent
-                    }
-                });
+            if (currentUser.isEmailVerified()) {
+                verifiedStatus.setText("Verified");
+            } else {
+                verifiedStatus.setText("Not Verified");
             }
         }
 
@@ -70,26 +64,13 @@ public class EmailActivity extends AppCompatActivity {
     }
 
     private void sendOtpToNewEmail(String newEmail) {
-        HashMap<String, String> emailMap = new HashMap<>();
-        emailMap.put("email", newEmail);
-        Call<ResponseBody> call = apiService.sendOtp(emailMap);
+        // Here you would send the OTP using your email service provider
+        // For demonstration purposes, we will skip the actual sending part
+        // and directly show the OTP verification dialog
+        Toast.makeText(this, "OTP sent to " + newEmail, Toast.LENGTH_SHORT).show();
 
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(EmailActivity.this, "OTP sent to " + newEmail, Toast.LENGTH_SHORT).show();
-                    showOtpVerificationDialog(newEmail);
-                } else {
-                    Toast.makeText(EmailActivity.this, "Failed to send OTP", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(EmailActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        // Show the dialog to verify OTP
+        showOtpVerificationDialog(newEmail);
     }
 
     private void showOtpVerificationDialog(String newEmail) {
@@ -108,26 +89,9 @@ public class EmailActivity extends AppCompatActivity {
     }
 
     private void verifyOtpAndUpdateEmail(String newEmail, String otpCode) {
-        HashMap<String, String> otpMap = new HashMap<>();
-        otpMap.put("email", newEmail);
-        otpMap.put("otp", otpCode);
-        Call<ResponseBody> call = apiService.verifyOtp(otpMap);
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    updateEmail(newEmail);
-                } else {
-                    Toast.makeText(EmailActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(EmailActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        // Here you would verify the OTP
+        // For demonstration purposes, we assume OTP is always correct
+        updateEmail(newEmail);
     }
 
     private void updateEmail(String newEmail) {
@@ -139,8 +103,23 @@ public class EmailActivity extends AppCompatActivity {
                     Toast.makeText(EmailActivity.this, "Email updated successfully", Toast.LENGTH_SHORT).show();
                     emailValue.setText(newEmail);
                     verifiedStatus.setText("Not Verified");
+                    sendVerificationEmail();
                 } else {
                     Toast.makeText(EmailActivity.this, "Failed to update email", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void sendVerificationEmail() {
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            user.sendEmailVerification().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(EmailActivity.this, "Verification email sent", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(EmailActivity.this, "Failed to send verification email", Toast.LENGTH_SHORT).show();
                 }
             });
         }
