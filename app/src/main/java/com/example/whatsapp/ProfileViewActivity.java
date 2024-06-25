@@ -35,15 +35,16 @@ public class ProfileViewActivity extends AppCompatActivity {
 
     ActivityProfileViewBinding binding;
 
-    FirebaseStorage storage;
-    FirebaseAuth auth;
-    FirebaseDatabase database;
-    ProgressDialog progressDialog;
+    private FirebaseStorage storage;
+    private FirebaseAuth auth;
+    private FirebaseDatabase database;
+    private ProgressDialog progressDialog;
 
     private FirebaseAnalytics mFirebaseAnalytics;
 
     private String initialUsername;
     private String initialAbout;
+    private String initialEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,30 +70,61 @@ public class ProfileViewActivity extends AppCompatActivity {
         binding.saveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String about = binding.about.getText().toString();
+                final String name = binding.txtUsername.getText().toString();
+                final String mobi = binding.txtMobile.getText().toString();
+                final String email = binding.txtEmail.getText().toString();
 
-                String about = binding.about.getText().toString();
-                String name = binding.txtUsername.getText().toString();
-                String mobi = binding.txtMobile.getText().toString();
-                String email = binding.txtEmail.getText().toString();
-
-                HashMap<String, Object> obj = new HashMap<>();
-                obj.put("username", name);
-                obj.put("about", about);
-                obj.put("mobile", mobi);
-                obj.put("mail", email);
-
-                database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
-                        .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                // Check if the email is already taken
+                database.getReference().child("Users")
+                        .orderByChild("mail")
+                        .equalTo(email)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(ProfileViewActivity.this, "Profile Saved!", Toast.LENGTH_SHORT).show();
-                                binding.saveProfile.setVisibility(View.GONE); // Hide the button after update
-                                initialUsername = name; // Update initial values
-                                initialAbout = about;
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                boolean emailExists = false;
+
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    Users user = snapshot.getValue(Users.class);
+                                    if (user != null && !snapshot.getKey().equals(FirebaseAuth.getInstance().getUid())) {
+                                        // Email already exists for another user
+                                        emailExists = true;
+                                        break;
+                                    }
+                                }
+
+                                if (emailExists) {
+                                    Toast.makeText(ProfileViewActivity.this, "Email already exists, please choose another one", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // Email does not exist, proceed with update
+                                    HashMap<String, Object> obj = new HashMap<>();
+                                    obj.put("username", name);
+                                    obj.put("about", about);
+                                    obj.put("mobile", mobi);
+                                    obj.put("mail", email);
+
+                                    database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
+                                            .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(ProfileViewActivity.this, "Profile Saved!", Toast.LENGTH_SHORT).show();
+                                                    binding.saveProfile.setVisibility(View.GONE); // Hide the button after update
+                                                    initialUsername = name; // Update initial values
+                                                    initialAbout = about;
+                                                    initialEmail = email;
+                                                }
+                                            });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                // Handle onCancelled if needed
                             }
                         });
             }
         });
+
 
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -109,6 +141,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                         // Save the initial values
                         initialUsername = users.getUsername();
                         initialAbout = users.getAbout();
+                        initialEmail = users.getMail();
 
                         addTextChangeListeners();
                     }
@@ -132,6 +165,8 @@ public class ProfileViewActivity extends AppCompatActivity {
     private void addTextChangeListeners() {
         binding.txtUsername.addTextChangedListener(textWatcher);
         binding.about.addTextChangedListener(textWatcher);
+        binding.txtEmail.addTextChangedListener(textWatcher);
+
     }
 
     private final TextWatcher textWatcher = new TextWatcher() {
@@ -142,9 +177,10 @@ public class ProfileViewActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             String currentUsername = binding.txtUsername.getText().toString();
             String currentAbout = binding.about.getText().toString();
+            String currentEmail = binding.txtEmail.getText().toString();
 
             // Show the update button if there are changes
-            if (!currentUsername.equals(initialUsername) || !currentAbout.equals(initialAbout)) {
+            if (!currentUsername.equals(initialUsername) || !currentAbout.equals(initialAbout) || !currentAbout.equals(initialEmail)) {
                 binding.saveProfile.setVisibility(View.VISIBLE);
             } else {
                 binding.saveProfile.setVisibility(View.GONE);

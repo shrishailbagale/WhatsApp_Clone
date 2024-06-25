@@ -83,6 +83,14 @@ public class SettingsActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {}
         });
 
+        binding.account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent account = new Intent(SettingsActivity.this, AccountActivity.class);
+                startActivity(account);
+            }
+        });
+
         binding.help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

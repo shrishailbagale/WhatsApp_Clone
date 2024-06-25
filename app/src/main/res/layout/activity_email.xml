@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EmailActivity">
+
+    <ImageView
+        android:id="@+id/email_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        app:tint="@color/purple_200" />
+
+    <TextView
+        android:id="@+id/email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email helps you access your account. It isn’t visible to others."
+        android:layout_below="@id/email_icon"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/email_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:layout_below="@id/email_text"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email_label"
+        android:layout_margin="16dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/email_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/email"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/edit_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            android:padding="6dp"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/verified_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verified"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_below="@+id/line1"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp" />
+</RelativeLayout>

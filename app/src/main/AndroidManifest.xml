@@ -27,6 +27,15 @@
         android:theme="@style/Theme.WhatsApp"
         tools:targetApi="31">
         <activity
+            android:name=".EmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmailManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".StatusDetailActivity"
             android:exported="false" />
         <activity
