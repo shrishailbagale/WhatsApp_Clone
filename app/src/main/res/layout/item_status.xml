@@ -53,10 +53,10 @@ tools:ignore="MissingDefaultResource">
         <ImageView
             android:id="@+id/delete_status"
             android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_height="match_parent"
             android:contentDescription="Option"
-            app:tint="@color/whiteSecondry"
-            app:srcCompat="@drawable/ic_menu"/>
+            app:srcCompat="@drawable/ic_menu"
+            app:tint="@color/whiteSecondry" />
 
     </LinearLayout>
 

@@ -1,0 +1,121 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#000"
+    tools:context=".UploadStatusActivity">
+
+    <LinearLayout
+        android:id="@+id/status_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/transparent">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="12dp"
+            android:src="@drawable/arrow_left"
+            app:tint="@color/whiteSecondry" />
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/status_input_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/status_image_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <VideoView
+            android:id="@+id/status_video_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/upload_buttons_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:padding="16dp"
+        android:gravity="center"
+        android:weightSum="3">
+
+        <EditText
+            android:id="@+id/status_text_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="What's on your mind?"
+            android:padding="12dp"
+            android:backgroundTint="@color/whiteSecondry"
+            android:background="@drawable/edit_text_bg"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/select_image_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Image" />
+
+        <Button
+            android:id="@+id/select_video_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video"
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/upload_status_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Upload"
+            android:visibility="gone"/>
+
+
+        <Button
+            android:id="@+id/cancel_upload_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel Upload"
+            android:padding="16dp"
+            android:visibility="gone"
+            android:layout_gravity="center" />
+
+
+        <ProgressBar
+            android:id="@+id/upload_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/upload_progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@color/whiteSecondry"
+            android:layout_gravity="center"
+            android:text="0%" />
+    </LinearLayout>
+</RelativeLayout>

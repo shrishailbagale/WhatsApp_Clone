@@ -63,7 +63,7 @@
                 android:paddingBottom="8dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/status_list"
+                android:id="@+id/status_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"/>
@@ -114,7 +114,7 @@
                 android:scaleType="centerInside"/>
 
             <ImageButton
-                android:id="@+id/camera_status"
+                android:id="@+id/fab_upload_status"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/circle_background"

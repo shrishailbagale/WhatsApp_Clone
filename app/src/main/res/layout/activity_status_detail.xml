@@ -1,20 +1,115 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000"
     tools:context=".StatusDetailActivity">
 
-    <ImageView
-        android:id="@+id/status_image_view"
+    <LinearLayout
+        android:id="@+id/status_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="Image View"
-        android:scaleType="centerCrop"
-        android:visibility="gone" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/transparent">
 
-    <VideoView
-        android:id="@+id/status_video_view"
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="12dp"
+            android:src="@drawable/arrow_left"
+            app:tint="@color/whiteSecondry" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_profile_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:id="@+id/user_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/status_time_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="53 minutes ago"
+                android:textColor="#bbb"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/delete_status"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:contentDescription="Option"
+            app:srcCompat="@drawable/ic_menu"
+            app:tint="@color/whiteSecondry" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/status_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_below="@id/status_header"
+        android:layout_marginBottom="35dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/status_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <VideoView
+            android:id="@+id/status_video_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/status_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+
+    <EditText
+        android:id="@+id/reply_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/edit_text_bg"
+        android:hint="Reply"
+        android:padding="12dp"
+        android:textColor="#fff"
+        android:backgroundTint="@color/exo_black_opacity_60"
+        android:textColorHint="#bbb"
+        android:imeOptions="actionSend"
+        android:inputType="text" />
 </RelativeLayout>

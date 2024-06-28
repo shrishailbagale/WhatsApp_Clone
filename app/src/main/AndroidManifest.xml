@@ -27,6 +27,12 @@
         android:theme="@style/Theme.WhatsApp"
         tools:targetApi="31">
         <activity
+            android:name=".MediaPickerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UploadStatusActivity"
+            android:exported="false" />
+        <activity
             android:name=".EmailActivity"
             android:exported="false" />
         <activity
